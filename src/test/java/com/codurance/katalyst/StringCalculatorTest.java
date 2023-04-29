@@ -23,4 +23,10 @@ public class StringCalculatorTest {
         StringCalculator calculator = new StringCalculator();
         assertEquals(53, calculator.add("4,49"));
     }
+
+    @Test
+    public void add_when_string_contains_many_numbers(){
+        StringCalculator calculator = new StringCalculator();
+        assertEquals(55, calculator.add("3,5,10,5,2,30"));
+    } 
 }
