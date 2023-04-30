@@ -76,4 +76,10 @@ public class StringCalculatorTest {
         StringCalculator calculator = new StringCalculator();
         assertEquals(6, calculator.add("//[\\*][%]\n1*2%3"));
     }
+
+    @Test
+    public void multiple_longer_length_separators(){
+        StringCalculator calculator = new StringCalculator();
+        assertEquals(6, calculator.add("//[foo][bar]\n1foo2bar3"));
+    }
 }
