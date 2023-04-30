@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 public class StringCalculator {
 
     private static final String DEFAULT_SEPARATOR = "[\\n|,]";
+    private static final int MAX_VALID_NUMBER = 1000;
 
     public Integer add(String numbers) {
         if("".equals(numbers)){
@@ -24,7 +25,7 @@ public class StringCalculator {
         if(containsNegativesNumbers(values)){
             throw new NegativesNotAllowedException(extractNegativesNumbers(values));
         }
-        return values.stream().reduce(0, (a, b) -> a + b);
+        return values.stream().filter(number -> number <= MAX_VALID_NUMBER).reduce(0, (a, b) -> a + b);
     }
 
     private boolean containsCustomSeparator(String numbers){
