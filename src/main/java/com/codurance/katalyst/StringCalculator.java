@@ -23,6 +23,7 @@ public class StringCalculator {
             numbers = removeCustomSeparator(numbers);
         }
         List<Integer> values = Arrays.stream(numbers.split(separator, -1))
+                                .filter(number -> !"".equals(number))
                                 .map(number -> Integer.valueOf(number))
                                 .collect(Collectors.toList());
         if(containsNegativesNumbers(values)){
