@@ -8,7 +8,7 @@ public class StringCalculator {
         if("".equals(numbers)){
             return 0;
         }
-        return Arrays.stream(numbers.split(",", -1))
+        return Arrays.stream(numbers.split("[\\n|,]", -1))
             .map(number -> Integer.valueOf(number))
             .reduce(0, (a, b) -> a + b);
     }
