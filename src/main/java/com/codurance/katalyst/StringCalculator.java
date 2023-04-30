@@ -1,9 +1,12 @@
 package com.codurance.katalyst;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.MatchResult;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class StringCalculator {
 
@@ -34,8 +37,16 @@ public class StringCalculator {
 
     private String extractCustomSeparator(String numbers){
         String customSeparator = numbers.substring(numbers.indexOf("//")+2, numbers.indexOf("\n"));
-        if(customSeparator.startsWith("[") && customSeparator.endsWith("]")){
-            return customSeparator.substring(1, customSeparator.length()-1);
+        List<String> separators = new ArrayList<String>();
+        while(customSeparator.indexOf("]") != -1){
+            String separator = customSeparator.substring(customSeparator.indexOf("[")+1, customSeparator.indexOf("]"));
+            separators.add(separator);
+            customSeparator = customSeparator.substring(customSeparator.indexOf("]")+1);
+        }
+        if(separators.size() > 1){
+            return "[" + String.join("|" , separators.toArray(new String[0])) + "]";
+        }else if(separators.size() == 1){
+            return separators.get(0);
         }
         return customSeparator;
     }
