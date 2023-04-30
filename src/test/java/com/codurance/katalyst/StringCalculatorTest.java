@@ -1,6 +1,7 @@
 package com.codurance.katalyst;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.regex.Pattern;
@@ -43,5 +44,14 @@ public class StringCalculatorTest {
     public void add_when_string_contains_custom_separator(){
         StringCalculator calculator = new StringCalculator();
         assertEquals(55, calculator.add("//;\n3;5;10;5;2;30"));
+    }
+
+    @Test
+    public void disallow_negatives(){
+        StringCalculator calculator = new StringCalculator();
+        Throwable exception = assertThrows(NegativesNotAllowedException.class, () -> {
+            calculator.add("1,-2,-3");
+        });
+        assertEquals("error: negatives not allowed: -2 -3", exception.getMessage());
     }
 }
