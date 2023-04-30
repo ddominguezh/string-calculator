@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.regex.Pattern;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 
 public class StringCalculatorTest {
     
@@ -59,5 +60,17 @@ public class StringCalculatorTest {
     public void ignore_numbers_bigger_than_1000(){
         StringCalculator calculator = new StringCalculator();
         assertEquals(2, calculator.add("1001,2"));
+    }
+
+    @Test
+    public void arbitrary_length_separators(){
+        StringCalculator calculator = new StringCalculator();
+        assertEquals(6, calculator.add("//[\\*\\*\\*]\n1***2***3"));
+    }
+
+    @Test
+    public void multiple_single_length_separators(){
+        StringCalculator calculator = new StringCalculator();
+        assertEquals(6, calculator.add("//[\\*][%]\n1*2%3"));
     }
 }
