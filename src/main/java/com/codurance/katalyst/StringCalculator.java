@@ -33,7 +33,11 @@ public class StringCalculator {
     }
 
     private String extractCustomSeparator(String numbers){
-        return numbers.substring(numbers.indexOf("//")+2, numbers.indexOf("\n"));
+        String customSeparator = numbers.substring(numbers.indexOf("//")+2, numbers.indexOf("\n"));
+        if(customSeparator.startsWith("[") && customSeparator.endsWith("]")){
+            return customSeparator.substring(1, customSeparator.length()-1);
+        }
+        return customSeparator;
     }
 
     private String removeCustomSeparator(String numbers){
