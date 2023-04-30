@@ -28,5 +28,11 @@ public class StringCalculatorTest {
     public void add_when_string_contains_many_numbers(){
         StringCalculator calculator = new StringCalculator();
         assertEquals(55, calculator.add("3,5,10,5,2,30"));
-    } 
+    }
+
+    @Test
+    public void add_when_string_contains_new_lines_separator(){
+        StringCalculator calculator = new StringCalculator();
+        assertEquals(55, calculator.add("3,5\n10,5,2\n30"));
+    }
 }
